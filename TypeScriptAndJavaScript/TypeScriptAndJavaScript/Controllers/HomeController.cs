@@ -18,5 +18,9 @@ namespace TypeScriptAndJavaScript.Controllers
         {
             return View();
         }
+        public ActionResult Assignment7()
+        {
+            return View();
+        }
     }
 }
