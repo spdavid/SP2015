@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Assignment8";
+}
+@section scripts
+{
+    <script src="~/Scripts/Assignment8.js"></script>
+   <link href="~/Content/Assignment8.css" rel="stylesheet" />
+}
+<h2>Assignment8</h2>
+
+<form class="form-inline">
+    <div class="form-group">
+        <label for="exampleInputName2">Name</label>
+        <input type="text" class="form-control" id="name" value="John Doe" placeholder="Jane Doe">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail2">Email</label>
+        <input type="email" class="form-control" id="email" value="jane.doe@example.com" placeholder="jane.doe@example.com">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputName2">Mobile</label>
+        <input type="text" class="form-control" id="mobile" value="07362363636" placeholder="072345687">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail2">ImageUrl</label>
+        <input type="text" class="form-control" id="imageUrl" value="http://www.brunningonline.net/simon/blog/archives/South%20Park%20Avatar.jpg" placeholder="http://server/image.png">
+    </div>
+    <button type="button" id="addContact" class="btn btn-default">Add Contact</button>
+</form>
+
+<div id="results" class="clearfix">
+
+
+</div>
+
+
+@*James stuff*@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+<div style="cursor:pointer; color:blue" data-toggle="modal" data-target="#myModal">test</div>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

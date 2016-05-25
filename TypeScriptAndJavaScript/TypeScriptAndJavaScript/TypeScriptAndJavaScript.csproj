@@ -91,12 +91,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Assignment8.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Assignment6.js" />
+    <Content Include="Scripts\Assignment8.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Assignment6.js.map" />
@@ -126,6 +128,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Assignment6.cshtml" />
     <Content Include="Views\Home\Assignment7.cshtml" />
+    <Content Include="Views\Home\Assignment8.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -140,6 +143,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Assignment6.ts" />
     <TypeScriptCompile Include="Scripts\Assignment7.ts" />
+    <TypeScriptCompile Include="Scripts\Assignment8.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>

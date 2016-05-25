@@ -1,0 +1,24 @@
+﻿
+.contactbubble{
+      float:left;
+      min-width:300px;
+      border:2px solid #555;
+      background-color: #eee;
+      border-radius:5px;
+      margin:10px 10px 0 0;
+      -webkit-box-shadow: 10px 10px 5px -8px rgba(143,143,143,1);
+-moz-box-shadow: 10px 10px 5px -8px rgba(143,143,143,1);
+box-shadow: 10px 10px 5px -8px rgba(143,143,143,1);
+
+}
+.contactbubble img
+{
+    max-width:100px;
+    float:left;
+}
+
+.contactbubble > div
+{
+    float:left;
+    padding:5px;
+}
