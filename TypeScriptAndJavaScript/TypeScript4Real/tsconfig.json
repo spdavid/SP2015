@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "outFile": "./Scripts/main.js"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "files": [
+    "./TypeScript/Vehicle.ts",
+    "./TypeScript/Car.ts",
+    "./TypeScript/Truck.ts",
+    "./TypeScript/Test.ts"
+  ],
+  "compileOnSave": true
+}
