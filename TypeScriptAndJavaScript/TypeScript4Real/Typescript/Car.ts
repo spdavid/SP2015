@@ -1,4 +1,5 @@
-﻿"use strict";
+﻿/// <reference path="vehicle.ts" />
+"use strict";
  
 // this is a namespace in TypeScript
 module Vehicles {

@@ -1,4 +1,7 @@
-﻿module Vehicles {
+﻿/// <reference path="vehicle.ts" />
+
+
+module Vehicles {
 
     // export = public 
     export class Truck {

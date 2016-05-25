@@ -20,6 +20,7 @@ var Vehicles;
     }());
     Vehicles.Vehicle = Vehicle;
 })(Vehicles || (Vehicles = {}));
+/// <reference path="vehicle.ts" />
 "use strict";
 // this is a namespace in TypeScript
 var Vehicles;
@@ -39,6 +40,7 @@ var Vehicles;
     }(Vehicles.Vehicle));
     Vehicles.Car = Car;
 })(Vehicles || (Vehicles = {}));
+/// <reference path="vehicle.ts" />
 var Vehicles;
 (function (Vehicles) {
     // export = public 
