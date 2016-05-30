@@ -39,7 +39,22 @@ var northwind;
         function Order() {
         }
         Order.RenderOrdersForEmployee = function (empId) {
-            console.log(empId);
+            var url = "http://services.odata.org/V4/Northwind/Northwind.svc/Orders?$expand=Customer&$filter=EmployeeID eq " + empId.toString();
+            $.getJSON(url, function (data) {
+                // clear the orders element
+                var orderDiv = $('#Orders');
+                orderDiv.html("");
+                console.log(data);
+                // loop through all orders
+                $.each(data.value, function (index, order) {
+                    var date = new Date(order.OrderDate);
+                    orderDiv.append("<div>" + order.Customer.CompanyName + " (" + date.toLocaleDateString() + ")</div>");
+                });
+            }, function (a, b) {
+                //fail
+                console.log(a);
+                console.log(b);
+            });
         };
         return Order;
     }());
