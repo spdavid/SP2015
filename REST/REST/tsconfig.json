@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outFile": "./scripts/main.js",
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "files": [
+    "./TsSource/Employee.ts",
+    "./TsSource/Order.ts",
+    "./Scripts/Typings/jquery/jquery.d.ts"
+  ]
+}
