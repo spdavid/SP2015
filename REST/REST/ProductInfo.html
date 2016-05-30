@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-2.2.3.min.js"></script>
+    <script src="Scripts/main.js"></script>
+    <script>
+        // document ready.. wait for page to load
+        $(document).ready(
+            function ()
+            {
+                northwind.Supplier.RenderSuppliers();
+            }
+            );
+    </script>
+</head>
+<body>
+    <div>
+        <div style="float:left" id="Suppliers"></div>
+        <div style="float:left" id="Products"></div>
+    </div>
+
+</body>
+</html>

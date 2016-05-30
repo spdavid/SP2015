@@ -60,4 +60,53 @@ var northwind;
     }());
     northwind.Order = Order;
 })(northwind || (northwind = {}));
+var northwind;
+(function (northwind) {
+    var Supplier = (function () {
+        function Supplier() {
+        }
+        Supplier.RenderSuppliers = function () {
+            var url = "http://services.odata.org/V4/Northwind/Northwind.svc/Suppliers?$select=CompanyName,Country,SupplierID";
+            $.getJSON(url, function (data) {
+                //success
+                console.log(data);
+                var suppliersDiv = $('#Suppliers');
+                // foreach (var supplier in data.value)
+                $.each(data.value, function (index, supplier) {
+                    var newElement = $("<div style='cursor:pointer'>" + supplier.CompanyName + "</div>");
+                    newElement.click(function () {
+                        northwind.Product.RenderProductsForSupplier(supplier.SupplierID);
+                    });
+                    suppliersDiv.append(newElement);
+                });
+            });
+        };
+        return Supplier;
+    }());
+    northwind.Supplier = Supplier;
+})(northwind || (northwind = {}));
+var northwind;
+(function (northwind) {
+    var Product = (function () {
+        function Product() {
+        }
+        Product.RenderProductsForSupplier = function (SupplierID) {
+            var url = "http://services.odata.org/V4/Northwind/Northwind.svc/Products?$filter=SupplierID eq " + SupplierID.toString();
+            var productsDiv = $('#Products');
+            productsDiv.html("");
+            $.getJSON(url, function (data) {
+                console.log(data);
+                $.each(data.value, function (index, prod) {
+                    productsDiv.append("<div>" + prod.ProductName + "</div>");
+                });
+            }, function (a, b) {
+                //fail
+                console.log(a);
+                console.log(b);
+            });
+        };
+        return Product;
+    }());
+    northwind.Product = Product;
+})(northwind || (northwind = {}));
 //# sourceMappingURL=main.js.map
