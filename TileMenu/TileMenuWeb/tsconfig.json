@@ -12,7 +12,9 @@
     "./TsSource/AddInInfo.ts",
     "./TsSource/Utils.ts",
     "./TsSource/Tile.ts",
-    "./scripts/typings/es6-promise/es6-promise.d.ts"
+    "./TsSource/TileApp.ts",
+    "./scripts/typings/es6-promise/es6-promise.d.ts",
+    "./scripts/typings/sharepoint/sharepoint.d.ts" 
 
 
   ],

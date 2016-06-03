@@ -7,9 +7,7 @@
 
             // use the app url to load a css file into sharepoint
             Utils.loadCss(this.AddInUrl + "/Content/Tiles.css");
-            
-
-
+         
         }
     }
 }

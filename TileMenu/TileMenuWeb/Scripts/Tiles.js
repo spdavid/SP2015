@@ -96,4 +96,56 @@ var TileMenu;
     }());
     TileMenu.Utils = Utils;
 })(TileMenu || (TileMenu = {}));
+var TileMenu;
+(function (TileMenu) {
+    var Tile = (function () {
+        function Tile(title, url, image, color) {
+            this.Title = title;
+            this.URL = url;
+            this.Image = image;
+            this.Color = color;
+        }
+        Tile.prototype.GetTileElement = function () {
+            var divElement = document.createElement("div");
+            divElement.setAttribute("class", "tile-container");
+            divElement.setAttribute("style", "background-color:" + this.Color);
+            divElement.setAttribute("onclick", "window.location = " + this.URL);
+            divElement.innerHTML =
+                "<img src='" + this.Image + "' />" +
+                    "<div>" + this.Title + "</div>";
+            return divElement;
+        };
+        return Tile;
+    }());
+    TileMenu.Tile = Tile;
+})(TileMenu || (TileMenu = {}));
+var TileMenu;
+(function (TileMenu) {
+    var TileApp = (function () {
+        function TileApp() {
+        }
+        TileApp.Init = function () {
+            document.getElementById("Tiles").innerText = "Hello Tiles";
+            // Utils.loadScript(_TileInfo.AddInUrl + "/scripts/es6-promise.min.js", function () {
+            TileApp.CreateTilesListIfNotExists();
+            // });
+        };
+        TileApp.CreateTilesListIfNotExists = function () {
+            SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+                var ctx = SP.ClientContext.get_current();
+                // get list needs the relative url to get the list. 
+                var list = ctx.get_web().getList("/sites/Tiles/SitePages");
+                ctx.load(list);
+                ctx.executeQueryAsync(function (sender, args) {
+                    console.log(list);
+                }, function (sender, args) {
+                    console.log(sender);
+                    console.log(args);
+                });
+            }, "sp.js");
+        };
+        return TileApp;
+    }());
+    TileMenu.TileApp = TileApp;
+})(TileMenu || (TileMenu = {}));
 //# sourceMappingURL=Tiles.js.map

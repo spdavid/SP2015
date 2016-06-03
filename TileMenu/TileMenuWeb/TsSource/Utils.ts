@@ -82,16 +82,13 @@ namespace TileMenu {
         }
         // loads a css file into the head based on its path
         static loadCss(path) {
-
-
             let head = document.getElementsByTagName("head");
-
             let e = document.createElement("link");
             head[0].appendChild(e);
             e.setAttribute("type", "text/css");
             e.setAttribute("rel", "stylesheet");
             e.setAttribute("href", path);
-
         }
+        
     }
 }
