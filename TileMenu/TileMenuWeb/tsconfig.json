@@ -11,7 +11,8 @@
   "files": [
     "./TsSource/AddInInfo.ts",
     "./TsSource/Utils.ts",
-    "./TsSource/Tile.ts"
+    "./TsSource/Tile.ts",
+    "./scripts/typings/es6-promise/es6-promise.d.ts"
 
 
   ],
