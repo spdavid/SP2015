@@ -1,3 +1,31 @@
-﻿body {
-    background-color:green;
+﻿.tile-container {
+    float:left;
+    width:100px;
+    height:100px;
+    margin-right: 5px;
+   padding-top:15px;
+   border:3px solid transparent;
+}
+
+    .tile-container:hover {
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.3);       
+    width: 92px;
+    height: 92px;
+    margin-top:4px;
+    margin-bottom:4px;
+    margin-left:4px;
+    margin-right:9px;
+    }
+
+.tile-container img
+{
+    width:70px;
+    margin: 0 auto; 
+    display:block;
+}
+
+.tile-container div{
+ text-align:center;
+ color:white;
+ font-weight:bold;
 }

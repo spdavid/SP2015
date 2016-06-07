@@ -15,7 +15,7 @@ namespace TileMenu {
 
                     if (this.status >= 200 && this.status < 300) {
 
-                        resolve(this.response);
+                        resolve(JSON.parse(this.response));
                     } else {
                         // Performs the function "reject" when this.status is different than 2xx
                         reject(this.statusText);

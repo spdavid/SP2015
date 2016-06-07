@@ -4,8 +4,6 @@ var TileMenu;
         function AddInInfo(url) {
             // this will be the path of your url https://localhost..... This is set in the home controller
             this.AddInUrl = url;
-            // use the app url to load a css file into sharepoint
-            TileMenu.Utils.loadCss(this.AddInUrl + "/Content/Tiles.css");
         }
         return AddInInfo;
     }());
@@ -24,7 +22,7 @@ var TileMenu;
                 request.send();
                 request.onload = function () {
                     if (this.status >= 200 && this.status < 300) {
-                        resolve(this.response);
+                        resolve(JSON.parse(this.response));
                     }
                     else {
                         // Performs the function "reject" when this.status is different than 2xx
@@ -125,6 +123,8 @@ var TileMenu;
         function TileApp() {
         }
         TileApp.Init = function () {
+            // use the app url to load a css file into sharepoint
+            TileMenu.Utils.loadCss(_TileInfo.AddInUrl + "/Content/Tiles.css");
             /// load our es6 promise so we have backwards compatibility for promises with ie11
             TileMenu.Utils.loadScript(_TileInfo.AddInUrl + "/scripts/es6-promise.min.js", function () {
                 TileMenu.Utils.loadScript(_TileInfo.AddInUrl + "/scripts/jquery-1.10.2.min.js", function () {
@@ -321,6 +321,8 @@ var TileMenu;
                 console.log(errormessage);
             });
         };
+        /// : Promise<string> says its returning a string as the promise
+        // same as return value in c#
         TileApp.SimplePromise = function (myName) {
             //return new Promise((resolve, reject) => {
             return new Promise(function (resolve, reject) {

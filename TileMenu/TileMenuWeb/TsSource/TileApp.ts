@@ -6,6 +6,10 @@ declare var _TileInfo: TileMenu.AddInInfo;
 namespace TileMenu {
     export class TileApp {
         static Init() {
+
+            // use the app url to load a css file into sharepoint
+            Utils.loadCss(_TileInfo.AddInUrl + "/Content/Tiles.css");
+
             /// load our es6 promise so we have backwards compatibility for promises with ie11
             Utils.loadScript(_TileInfo.AddInUrl + "/scripts/es6-promise.min.js", function () {
                 Utils.loadScript(_TileInfo.AddInUrl + "/scripts/jquery-1.10.2.min.js", function () {
@@ -252,8 +256,6 @@ namespace TileMenu {
 
             
         }
-
-
         static SimeplePromiseTest() {
             TileApp.SimplePromise("David")
                 .then((reponse) => {
@@ -267,7 +269,6 @@ namespace TileMenu {
                 }
                 );
         }
-
         /// : Promise<string> says its returning a string as the promise
         // same as return value in c#
         static SimplePromise(myName: string): Promise<string>{
