@@ -280,21 +280,59 @@ var TileMenu;
         };
         TileApp.RenderTilesOnPage = function () {
             var restUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Tiles')/items?$select=Title,Image_x0020_Url,Tile_x0020_Color,Navigate_x0020_Url";
-            $.ajax({
-                type: 'GET',
-                url: restUrl,
-                contentType: 'application/json',
-                headers: { accept: 'application/json' },
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (a, b, c) {
-                    console.log(a);
-                    console.log(b);
-                    console.log(c);
+            TileMenu.Utils.getJSON(restUrl).then(function (data) {
+                console.log(data);
+                var tilesElement = document.getElementById("Tiles");
+                for (var i = 0; i < data.value.length; i++) {
+                    var tileInfo = data.value[i];
+                    var tile = new TileMenu.Tile(tileInfo.Title, tileInfo.Navigate_x0020_Url, tileInfo.Image_x0020_Url, tileInfo.Tile_x0020_Color);
+                    tilesElement.appendChild(tile.GetTileElement());
                 }
             });
-            document.getElementById("Tiles").innerText = "Hello Tiles";
+            //$.ajax( {
+            //     type: 'GET',
+            //     url: restUrl,
+            //     contentType: 'application/json',
+            //     headers: { accept: 'application/json' },
+            //     success: function (data) {
+            //         console.log(data);
+            //         var tilesElement = document.getElementById("Tiles")
+            //         for (var i = 0; i < data.value.length; i++) {
+            //             var tileInfo = data.value[i];
+            //             var tile = new TileMenu.Tile(tileInfo.Title, tileInfo.Navigate_x0020_Url, tileInfo.Image_x0020_Url, tileInfo.Tile_x0020_Color);
+            //             tilesElement.appendChild(tile.GetTileElement());
+            //         }
+            //     },
+            //     error: function (a, b, c) {
+            //         console.log(a);
+            //         console.log(b);
+            //         console.log(c);
+            //     }
+            // });
+        };
+        TileApp.SimeplePromiseTest = function () {
+            TileApp.SimplePromise("David")
+                .then(function (reponse) {
+                // will output "that is correct"
+                console.log(reponse);
+            })
+                .catch(function (errormessage) {
+                // will output "wrong name"
+                console.log(errormessage);
+            });
+        };
+        TileApp.SimplePromise = function (myName) {
+            //return new Promise((resolve, reject) => {
+            return new Promise(function (resolve, reject) {
+                if (myName == "David") {
+                    // return string
+                    resolve("That is correct");
+                }
+                else {
+                    // throw exception
+                    reject("wrong name");
+                }
+            });
         };
         return TileApp;
     }());

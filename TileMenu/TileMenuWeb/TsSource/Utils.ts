@@ -4,7 +4,7 @@
 
 namespace TileMenu {
     export class Utils {
-        static getJSON(url) {
+        static getJSON(url): Promise<any> {
           
             var prom = new Promise(function (resolve, reject) {
                 var request = new XMLHttpRequest();

@@ -1,4 +1,6 @@
 ﻿
+// declare var = add reference kind of
+// does not get converted into javascript
 declare var _TileInfo: TileMenu.AddInInfo;
 
 namespace TileMenu {
@@ -17,7 +19,6 @@ namespace TileMenu {
                 });
             });
         }
-
         static CreateTilesListIfNotExists(): Promise<boolean> {
 
 
@@ -155,7 +156,6 @@ namespace TileMenu {
 
 
         }
-
         static AddDummyData(list: SP.List) {
             return new Promise((resolve, reject) => {
 
@@ -210,30 +210,81 @@ namespace TileMenu {
 
             });
         }
-
-
         static RenderTilesOnPage() {
             var restUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Tiles')/items?$select=Title,Image_x0020_Url,Tile_x0020_Color,Navigate_x0020_Url";
 
-            $.ajax({
-                type: 'GET',
-                url: restUrl,
-                contentType: 'application/json',
-                headers: { accept: 'application/json' },
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (a, b, c) {
-                    console.log(a);
-                    console.log(b);
-                    console.log(c);
+            TileMenu.Utils.getJSON(restUrl).then((data) => {
+                console.log(data);
+                    var tilesElement = document.getElementById("Tiles")
+                    for (var i = 0; i < data.value.length; i++) {
+                        var tileInfo = data.value[i];
+                        var tile = new TileMenu.Tile(tileInfo.Title, tileInfo.Navigate_x0020_Url, tileInfo.Image_x0020_Url, tileInfo.Tile_x0020_Color);
+                        tilesElement.appendChild(tile.GetTileElement());
+                    }
+            });
+
+
+
+
+
+           //$.ajax( {
+           //     type: 'GET',
+           //     url: restUrl,
+           //     contentType: 'application/json',
+           //     headers: { accept: 'application/json' },
+           //     success: function (data) {
+           //         console.log(data);
+           //         var tilesElement = document.getElementById("Tiles")
+           //         for (var i = 0; i < data.value.length; i++) {
+           //             var tileInfo = data.value[i];
+           //             var tile = new TileMenu.Tile(tileInfo.Title, tileInfo.Navigate_x0020_Url, tileInfo.Image_x0020_Url, tileInfo.Tile_x0020_Color);
+           //             tilesElement.appendChild(tile.GetTileElement());
+           //         }
+
+           //     },
+           //     error: function (a, b, c) {
+           //         console.log(a);
+           //         console.log(b);
+           //         console.log(c);
+           //     }
+           // });
+
+
+            
+        }
+
+
+        static SimeplePromiseTest() {
+            TileApp.SimplePromise("David")
+                .then((reponse) => {
+                    // will output "that is correct"
+                    console.log(reponse);
+                })
+                .catch(
+                (errormessage) => {
+                    // will output "wrong name"
+                    console.log(errormessage);
+                }
+                );
+        }
+
+        /// : Promise<string> says its returning a string as the promise
+        // same as return value in c#
+        static SimplePromise(myName: string): Promise<string>{
+            //return new Promise((resolve, reject) => {
+            return new Promise(function (resolve, reject) {
+                if (myName == "David") {
+                    // return string
+                    resolve("That is correct");
+                }
+                else {
+                    // throw exception
+                    reject("wrong name");
                 }
             });
 
 
-            document.getElementById("Tiles").innerText = "Hello Tiles";
-
-        }
+        } 
 
     }
 }
