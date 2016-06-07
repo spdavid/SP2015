@@ -127,35 +127,52 @@ var TileMenu;
         TileApp.Init = function () {
             /// load our es6 promise so we have backwards compatibility for promises with ie11
             TileMenu.Utils.loadScript(_TileInfo.AddInUrl + "/scripts/es6-promise.min.js", function () {
-                TileApp.CreateTilesListIfNotExists();
-                // render tiles from list
+                TileMenu.Utils.loadScript(_TileInfo.AddInUrl + "/scripts/jquery-1.10.2.min.js", function () {
+                    TileApp.CreateTilesListIfNotExists()
+                        .then(TileApp.RenderTilesOnPage)
+                        .catch(function (errorinfo) {
+                        console.log(errorinfo);
+                    });
+                    // render tiles from list
+                });
             });
         };
         TileApp.CreateTilesListIfNotExists = function () {
-            // executeOrDelayUntilScriptLoaded waits for sp.js to load 
-            // so we dont get erros when using the JSOM object model
-            SP.SOD.executeOrDelayUntilScriptLoaded(function () {
-                //document.getElementById("Tiles").innerText = "Hello Tiles";
-                var pathToList = _spPageContextInfo.webServerRelativeUrl + "/List/Tiles";
-                // () => {}   is the same as function () {}
-                TileApp.ListExists(pathToList)
-                    .then(function (list) {
-                    if (list == undefined) {
-                        // we need to create a list
-                        console.log("list does not exist");
-                        TileApp.CreateTilesList();
-                    }
-                    else {
-                        console.log("list does  exist");
-                    }
-                })
-                    .catch(function (errorInfo) {
-                    console.log(errorInfo);
-                });
-                ;
-            }, "sp.js");
+            return new Promise(function (resolve, reject) {
+                // executeOrDelayUntilScriptLoaded waits for sp.js to load 
+                // so we dont get erros when using the JSOM object model
+                SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+                    var pathToList = _spPageContextInfo.webServerRelativeUrl + "/List/Tiles";
+                    // () => {}   is the same as function () {}
+                    TileApp.GetList(pathToList)
+                        .then(function (list) {
+                        // if list is null
+                        if (list == undefined) {
+                            // we need to create a list
+                            console.log("list does not exist");
+                            TileApp.CreateTilesList().then(function (newList) {
+                                TileApp.AddFieldsToTilesList(newList).then(function () {
+                                    TileApp.AddDummyData(newList).then(function () {
+                                        resolve(true);
+                                    });
+                                });
+                            });
+                        }
+                        else {
+                            console.log("list does exist");
+                            // render tiles on page
+                            resolve(true);
+                        }
+                    })
+                        .catch(function (errorInfo) {
+                        console.log(errorInfo);
+                        reject(errorInfo);
+                    });
+                    ;
+                }, "sp.js");
+            });
         };
-        TileApp.ListExists = function (url) {
+        TileApp.GetList = function (url) {
             return new Promise(function (resolve, reject) {
                 var ctx = SP.ClientContext.get_current();
                 // get list needs the relative url to get the list. 
@@ -177,16 +194,107 @@ var TileMenu;
             });
         };
         TileApp.CreateTilesList = function () {
-            var ctx = SP.ClientContext.get_current();
-            var listInfo = new SP.ListCreationInformation();
-            listInfo.set_title("Tiles");
-            listInfo.set_url("List/Tiles");
-            listInfo.set_templateType(SP.ListTemplateType.genericList);
-            var list = ctx.get_web().get_lists().add(listInfo);
-            ctx.load(list);
-            ctx.executeQueryAsync(function (sender, args) {
-                console.log(list);
+            return new Promise(function (resolve, reject) {
+                var ctx = SP.ClientContext.get_current();
+                // add list info 
+                var listInfo = new SP.ListCreationInformation();
+                listInfo.set_title("Tiles");
+                listInfo.set_url("List/Tiles");
+                listInfo.set_templateType(SP.ListTemplateType.genericList);
+                // create the list
+                var list = ctx.get_web().get_lists().add(listInfo);
+                ctx.load(list);
+                ctx.executeQueryAsync(function (sender, args) {
+                    // success
+                    resolve(list);
+                }, 
+                //error
+                function (sender, args) {
+                    reject(args);
+                });
             });
+        };
+        TileApp.AddFieldsToTilesList = function (list) {
+            return new Promise(function (resolve, reject) {
+                var ctx = SP.ClientContext.get_current();
+                list.get_fields().addFieldAsXml('<Field ID="{F8042024-A8B9-4DF3-842E-F16E4CF66B37}" Name="NavigateUrl" StaticName="NavigateUrl" DisplayName="Navigate Url" Type="Text" Required="TRUE" Group="Tiles" />', true, null);
+                list.get_fields().addFieldAsXml('<Field ID="{B9CC898D-BE0A-4CC0-830A-E83B10A12F07}" Name="ImageUrl" StaticName="ImageUrl" DisplayName="Image Url" Type="Text" Required="TRUE" Group="Tiles" />', true, null);
+                // the ` allows us to write text multiline in our code
+                var choiceFieldXml = "<Field ID=\"{87697A18-22A6-4B25-9778-150ADF71C97D}\"\n                                         Name=\"TileColor\"\n\t                                     StaticName=\"TileColor\"\n                                         DisplayName=\"Tile Color\"\n                                         Type=\"Choice\"\n                                         Required=\"TRUE\"\n                                         Group=\"Tiles\">\n                                    <CHOICES>\n                                      <CHOICE>Green</CHOICE>\n                                      <CHOICE>Blue</CHOICE>\n                                      <CHOICE>Orange</CHOICE>\n                                      <CHOICE>Grey</CHOICE>\n                                    </CHOICES>\n                                  </Field>";
+                list.get_fields().addFieldAsXml(choiceFieldXml, true, null);
+                ctx.executeQueryAsync(function (sender, args) {
+                    // when fields are created we can return 
+                    resolve(true);
+                }, 
+                //error
+                function (sender, args) {
+                    reject(args);
+                });
+            });
+        };
+        TileApp.AddDummyData = function (list) {
+            return new Promise(function (resolve, reject) {
+                var newIteminfo = new SP.ListItemCreationInformation();
+                var item = list.addItem(newIteminfo);
+                //item.set_item("internalname", "value");
+                // C# Csom equivalent item["internalname"] = "value"
+                item.set_item("Title", "Tile 1");
+                item.set_item("Navigate_x0020_Url", "#");
+                item.set_item("Image_x0020_Url", "https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=david@zalodev.com&UA=0&size=HR64x64&sc=1465291685321");
+                item.set_item("Tile_x0020_Color", "Blue");
+                item.update();
+                var item2 = list.addItem(newIteminfo);
+                //item.set_item("internalname", "value");
+                // C# Csom equivalent item["internalname"] = "value"
+                item2.set_item("Title", "Tile 2");
+                item2.set_item("Navigate_x0020_Url", "#");
+                item2.set_item("Image_x0020_Url", "https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=david@zalodev.com&UA=0&size=HR64x64&sc=1465291685321");
+                item2.set_item("Tile_x0020_Color", "Green");
+                item2.update();
+                var item3 = list.addItem(newIteminfo);
+                //item.set_item("internalname", "value");
+                // C# Csom equivalent item["internalname"] = "value"
+                item3.set_item("Title", "Tile 3");
+                item3.set_item("Navigate_x0020_Url", "#");
+                item3.set_item("Image_x0020_Url", "https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=david@zalodev.com&UA=0&size=HR64x64&sc=1465291685321");
+                item3.set_item("Tile_x0020_Color", "Yellow");
+                item3.update();
+                var item4 = list.addItem(newIteminfo);
+                //item.set_item("internalname", "value");
+                // C# Csom equivalent item["internalname"] = "value"
+                item4.set_item("Title", "Tile 4");
+                item4.set_item("Navigate_x0020_Url", "#");
+                item4.set_item("Image_x0020_Url", "https://outlook.office365.com/owa/service.svc/s/GetPersonaPhoto?email=david@zalodev.com&UA=0&size=HR64x64&sc=1465291685321");
+                item4.set_item("Tile_x0020_Color", "Grey");
+                item4.update();
+                list.get_context().executeQueryAsync(function (sender, args) {
+                    //success
+                    resolve(true);
+                }, function (sender, args) {
+                    //fail
+                    console.log("failed to create dummy data");
+                    console.log(args);
+                    reject(args);
+                });
+            });
+        };
+        TileApp.RenderTilesOnPage = function () {
+            var restUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Tiles')/items?$select=Title,Image_x0020_Url,Tile_x0020_Color,Navigate_x0020_Url";
+            $.ajax({
+                type: 'GET',
+                url: restUrl,
+                contentType: 'application/json',
+                headers: { accept: 'application/json' },
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (a, b, c) {
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                }
+            });
+            document.getElementById("Tiles").innerText = "Hello Tiles";
         };
         return TileApp;
     }());

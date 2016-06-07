@@ -22,7 +22,7 @@ namespace TileMenuWeb.Controllers
                 if (ctx != null)
                 {
                     spUser = ctx.Web.CurrentUser;
-
+                   
                     ctx.Load(spUser, user => user.Title);
 
                     ctx.ExecuteQuery();
