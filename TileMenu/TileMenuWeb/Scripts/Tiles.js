@@ -125,24 +125,68 @@ var TileMenu;
         function TileApp() {
         }
         TileApp.Init = function () {
-            document.getElementById("Tiles").innerText = "Hello Tiles";
-            // Utils.loadScript(_TileInfo.AddInUrl + "/scripts/es6-promise.min.js", function () {
-            TileApp.CreateTilesListIfNotExists();
-            // });
+            /// load our es6 promise so we have backwards compatibility for promises with ie11
+            TileMenu.Utils.loadScript(_TileInfo.AddInUrl + "/scripts/es6-promise.min.js", function () {
+                TileApp.CreateTilesListIfNotExists();
+                // render tiles from list
+            });
         };
         TileApp.CreateTilesListIfNotExists = function () {
+            // executeOrDelayUntilScriptLoaded waits for sp.js to load 
+            // so we dont get erros when using the JSOM object model
             SP.SOD.executeOrDelayUntilScriptLoaded(function () {
+                //document.getElementById("Tiles").innerText = "Hello Tiles";
+                var pathToList = _spPageContextInfo.webServerRelativeUrl + "/List/Tiles";
+                // () => {}   is the same as function () {}
+                TileApp.ListExists(pathToList)
+                    .then(function (list) {
+                    if (list == undefined) {
+                        // we need to create a list
+                        console.log("list does not exist");
+                        TileApp.CreateTilesList();
+                    }
+                    else {
+                        console.log("list does  exist");
+                    }
+                })
+                    .catch(function (errorInfo) {
+                    console.log(errorInfo);
+                });
+                ;
+            }, "sp.js");
+        };
+        TileApp.ListExists = function (url) {
+            return new Promise(function (resolve, reject) {
                 var ctx = SP.ClientContext.get_current();
                 // get list needs the relative url to get the list. 
-                var list = ctx.get_web().getList("/sites/Tiles/SitePages");
+                var list = ctx.get_web().getList(url);
                 ctx.load(list);
                 ctx.executeQueryAsync(function (sender, args) {
-                    console.log(list);
+                    // success
+                    resolve(list);
                 }, function (sender, args) {
-                    console.log(sender);
-                    console.log(args);
+                    if (args.get_message() == "File Not Found.") {
+                        resolve(undefined);
+                    }
+                    else {
+                        console.log("Error");
+                        // reject = throwing an exception
+                        reject(args);
+                    }
                 });
-            }, "sp.js");
+            });
+        };
+        TileApp.CreateTilesList = function () {
+            var ctx = SP.ClientContext.get_current();
+            var listInfo = new SP.ListCreationInformation();
+            listInfo.set_title("Tiles");
+            listInfo.set_url("List/Tiles");
+            listInfo.set_templateType(SP.ListTemplateType.genericList);
+            var list = ctx.get_web().get_lists().add(listInfo);
+            ctx.load(list);
+            ctx.executeQueryAsync(function (sender, args) {
+                console.log(list);
+            });
         };
         return TileApp;
     }());
