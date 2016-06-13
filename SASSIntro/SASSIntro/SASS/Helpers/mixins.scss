@@ -1,0 +1,17 @@
+﻿@mixin mybox($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+          border: 1px solid #808080;
+          background-color: #d8d8d8;
+}
+
+%mybox2 {
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+      -ms-border-radius: 5px;
+          border-radius: 5px;
+          border: 1px solid #808080;
+          background-color: #d8d8d8;
+}

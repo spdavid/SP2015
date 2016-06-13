@@ -1,0 +1,21 @@
+﻿body {
+    background-color: fade-out(#716161, 0.3);
+}
+
+#defaultpage {
+    font-size: $defaultfontsize;
+    color: $defaultfontcolor;
+
+
+    H1 {
+        color: $defaultfontcolor;
+    }
+
+    p {
+        font-size: $defaultfontsize / 1.7;
+    }
+
+    .box {
+        @extend %mybox2;
+    }
+}
