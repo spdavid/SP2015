@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.SharePoint.Client.Taxonomy;
+using System.Web.Hosting;
 
 namespace ProductPageWeb.Helpers
 {
@@ -117,7 +118,20 @@ namespace ProductPageWeb.Helpers
 
         }
 
+        public static void UploadPageLayout(ClientContext ctx)
+        {
+            // bad because not every machine has same path
+            //string path = @"D:\Source\DavidGitHub\SP2015\OD2\ProductPage\ProductPageWeb\SPContent\ProductPageLayout.aspx";
 
+            // good
+
+            string productPageCTID = Constants.WELCOME_PAGE_ID + "00" + Constants.PRODUCT_PAGE_END_ID;
+
+            string path = HttpContext.Current.Server.MapPath("./SPContent/ProductPageLayout.aspx");
+
+            ctx.Web.DeployPageLayout(path, "Product Page", "", productPageCTID, "aOD2");
+           
+        }
 
 
     }

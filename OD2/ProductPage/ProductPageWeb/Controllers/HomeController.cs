@@ -28,8 +28,9 @@ namespace ProductPageWeb.Controllers
 
                     ViewBag.UserName = spUser.Title;
 
-                    Helpers.ContentHelper.CreateProductTaxonomy(ctx);
-                    Helpers.ContentHelper.CreateProductContentType(ctx);
+                    //Helpers.ContentHelper.CreateProductTaxonomy(ctx);
+                    //Helpers.ContentHelper.CreateProductContentType(ctx);
+                    Helpers.ContentHelper.UploadPageLayout(ctx);
                 }
             }
 

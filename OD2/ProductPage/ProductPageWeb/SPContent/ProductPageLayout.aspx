@@ -17,6 +17,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderId="PlaceHolderTitleBreadcrumb" runat="server"> <SharePointWebControls:ListSiteMapPath runat="server" SiteMapProviders="CurrentNavigationSwitchableProvider" RenderCurrentNodeAsLink="false" PathSeparator="" CssClass="s4-breadcrumb" NodeStyle-CssClass="s4-breadcrumbNode" CurrentNodeStyle-CssClass="s4-breadcrumbCurrentNode" RootNodeStyle-CssClass="s4-breadcrumbRootNode" NodeImageOffsetX=0 NodeImageOffsetY=289 NodeImageWidth=16 NodeImageHeight=16 NodeImageUrl="/_layouts/15/images/fgimg.png?rev=43" HideInteriorRootNodes="true" SkipLinkText="" /> </asp:Content>
 <asp:Content ContentPlaceholderID="PlaceHolderMain" runat="server">
+    <h1>Custom Pagte Layout for us</h1>
 	<div class="article article-left">
 		<PublishingWebControls:EditModePanel runat="server" CssClass="edit-mode-panel title-edit">
 			<SharePointWebControls:TextField runat="server" FieldName="Title"/>
