@@ -259,6 +259,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\spcontext.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="SPContent\Item_Product_HoverPanel.html" />
+    <Content Include="SPContent\Item_Product.html" />
     <Content Include="SPContent\Item_FavoriteFood.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

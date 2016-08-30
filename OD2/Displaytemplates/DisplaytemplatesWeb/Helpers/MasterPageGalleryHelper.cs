@@ -16,14 +16,21 @@ namespace DisplaytemplatesWeb.Helpers
             List list = ctx.Web.GetListByUrl("/_catalogs/masterpage");
             Folder rootFolder = list.RootFolder;
             Folder dtFolder = rootFolder.EnsureFolder("Display Templates");
-            Folder cwpFolder = dtFolder.EnsureFolder("Content Web Parts");
+            //Folder cwpFolder = dtFolder.EnsureFolder("Content Web Parts");
 
-            string path = HttpContext.Current.Server.MapPath("./SPContent/Item_FavoriteFood.html");
+            //string path = HttpContext.Current.Server.MapPath("./SPContent/Item_FavoriteFood.html");
 
-            cwpFolder.UploadFile("Item_FavoriteFood.html", path, true);
+            //cwpFolder.UploadFile("Item_FavoriteFood.html", path, true);
 
+            Folder searchFolder = dtFolder.EnsureFolder("Search");
 
+            string path2 = HttpContext.Current.Server.MapPath("./SPContent/Item_Product.html");
 
+            searchFolder.UploadFile("Item_Product.html", path2, true);
+
+            string path3 = HttpContext.Current.Server.MapPath("./SPContent/Item_Product_HoverPanel.html");
+
+            searchFolder.UploadFile("Item_Product_HoverPanel.html", path3, true);
 
         }
 
