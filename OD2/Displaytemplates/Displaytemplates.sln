@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Displaytemplates", "Displaytemplates\Displaytemplates.csproj", "{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisplaytemplatesWeb", "DisplaytemplatesWeb\DisplaytemplatesWeb.csproj", "{F27F1BD0-3693-4923-8B2B-DD7CBB3EE576}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D81B4B-27B0-4A04-A0FD-CF1E392C98EB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F27F1BD0-3693-4923-8B2B-DD7CBB3EE576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F27F1BD0-3693-4923-8B2B-DD7CBB3EE576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F27F1BD0-3693-4923-8B2B-DD7CBB3EE576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F27F1BD0-3693-4923-8B2B-DD7CBB3EE576}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
