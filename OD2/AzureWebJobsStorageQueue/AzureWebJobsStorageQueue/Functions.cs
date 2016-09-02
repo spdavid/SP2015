@@ -24,6 +24,8 @@ namespace AzureWebJobsStorageQueue
 
         }
 
+        // i can call this function whatever i want. It looks for anotherqueue messages and when it 
+        // finds it, it will automatially. 
         public static void foo([QueueTrigger("anotherqueue")] string message, TextWriter log)
         {
             Common.Entities.HockeyPlayer hp = Common.Helpers.SerializerHelper.DeSerializeObject<Common.Entities.HockeyPlayer>(message);

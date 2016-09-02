@@ -14,9 +14,13 @@ namespace AzureWebJobsStorageQueue
           // AzureWebJobsDashboard and AzureWebJobsStorage
         static void Main()
         {
+            // configuration object
             JobHostConfiguration config = new JobHostConfiguration();
+            // the amount of time that the job checks the queue for new objects
             config.Queues.MaxPollingInterval = TimeSpan.FromSeconds(2);
+            // the amount of times an item retries on exception before it gets added to the poisend queue
             config.Queues.MaxDequeueCount = 1;
+            // make sure the host is using our config settings
             var host = new JobHost(config);
             // The following code ensures that the WebJob will be running continuously
             host.RunAndBlock();
