@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureWebJobsStorageQueue", "AzureWebJobsStorageQueue\AzureWebJobsStorageQueue.csproj", "{C2C72827-51F9-4D91-BFF3-F658C3C00ADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddToQueueCode", "AddToQueueCode\AddToQueueCode.csproj", "{465516E3-72C9-48EE-8404-CDADDC1CCD26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{07F433E3-6225-4DA6-90A4-2CF3407546E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2C72827-51F9-4D91-BFF3-F658C3C00ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C72827-51F9-4D91-BFF3-F658C3C00ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C72827-51F9-4D91-BFF3-F658C3C00ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C72827-51F9-4D91-BFF3-F658C3C00ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{465516E3-72C9-48EE-8404-CDADDC1CCD26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{465516E3-72C9-48EE-8404-CDADDC1CCD26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{465516E3-72C9-48EE-8404-CDADDC1CCD26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{465516E3-72C9-48EE-8404-CDADDC1CCD26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07F433E3-6225-4DA6-90A4-2CF3407546E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07F433E3-6225-4DA6-90A4-2CF3407546E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07F433E3-6225-4DA6-90A4-2CF3407546E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07F433E3-6225-4DA6-90A4-2CF3407546E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

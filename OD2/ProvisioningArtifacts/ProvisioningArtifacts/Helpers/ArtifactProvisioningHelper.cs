@@ -33,8 +33,8 @@ namespace ProvisioningArtifacts.Helpers
            File file =  page.ListItem.File;
            LimitedWebPartManager lwpm = file.GetLimitedWebPartManager(Microsoft.SharePoint.Client.WebParts.PersonalizationScope.Shared);
            WebPartDefinition webDef = lwpm.ImportWebPart(WebPartStrings.ProductSearchWP);
-            lwpm.AddWebPart(webDef.WebPart, "TopZone", 1);
-            ctx.ExecuteQuery();
+           lwpm.AddWebPart(webDef.WebPart, "TopZone", 1);
+           ctx.ExecuteQuery();
            
         }
     }
