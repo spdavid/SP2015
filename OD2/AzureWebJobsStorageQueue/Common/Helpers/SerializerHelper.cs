@@ -12,6 +12,7 @@ namespace Common.Helpers
         public static string SerializeObject<T>(T messageObject)
          where T : struct
         {
+
             // Create a message and add it to the queue.
            return JsonConvert.SerializeObject(messageObject);
            

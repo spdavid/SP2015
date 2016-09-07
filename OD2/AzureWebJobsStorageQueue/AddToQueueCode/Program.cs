@@ -37,7 +37,7 @@ namespace AddToQueueCode
             hp.id = 1;
             hp.name = "David";
             hp.position = "Goalie";
-
+            // {id = 1, name = "David", position = "Goalie"}
            string aMessage = Common.Helpers.SerializerHelper.SerializeObject<Common.Entities.HockeyPlayer>(hp);
 
             // Create new Message
